@@ -10,9 +10,18 @@ async def main() -> int:
                 page = await browser.new_page()
                 await page.goto(url)
 
+                f = ""
+                while(f != "Y"):
+                        f = (input("continue?[y/n]: ").capitalize())
+
                 anchors = page.locator("a")
                 hrefs = await anchors.evaluate_all(
-                        "anchors => anchors.filter(anchor => anchor.hasAttribute('href')).map(anchor => anchor.href).filter(h => h.match(/.*\\.[^\\/]+$/i))"
+                        """anchors => {
+                                return anchors
+                                .filter(anchor => anchor.hasAttribute('href'))
+                                .map(anchor => anchor.href)
+                                .filter(h => h.match(/.*\\.[^\\/]+$/i))
+                        } """
                         )
                 print(hrefs)
                 

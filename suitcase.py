@@ -3,12 +3,12 @@ import asyncio
 from playwright.async_api import async_playwright
 
 async def main() -> int:
-        url = input("goto?: ")
+        goto_response = input("goto: ")
         
         async with async_playwright() as p:
                 browser = await p.chromium.launch(headless=False)
                 page = await browser.new_page()
-                await page.goto(url)
+                await page.goto(goto_response)
 
                 f = ""
                 while(f != "Y"):

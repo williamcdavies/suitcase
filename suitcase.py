@@ -1,10 +1,14 @@
 import asyncio
+import json
 
 from playwright.async_api import async_playwright
 
 async def main() -> int:
         goto_response = input("goto: ")
-        
+
+        with open("config.json", "r") as f:
+                config = json.load(f)
+                
         async with async_playwright() as p:
                 browser = await p.chromium.launch(headless=False)
                 page = await browser.new_page()
@@ -16,13 +20,15 @@ async def main() -> int:
 
                 anchors = page.locator("a")
                 hrefs = await anchors.evaluate_all(
-                        """anchors => {
-                                return anchors
-                                .filter(anchor => anchor.hasAttribute('href'))
-                                .map(anchor => anchor.href)
-                                .filter(h => h.match(/.*\\.[^\\/]+$/i))
-                        } """
-                        )
+                        """
+                        (anchors, filters) => {
+                        return anchors
+                                .map(a => a.href)
+                                .filter(href => filters.some(f => new RegExp(f.replace('.', '\\.'), 'i').test(href)));
+                        }
+                        """,
+                        config["filters"]
+                )
                 print(hrefs)
                 
                 await browser.close()

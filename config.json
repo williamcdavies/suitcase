@@ -1,5 +1,7 @@
 {
         "filters": [
-                ".txt"
+                ".kml",
+                ".txt",
+                ".zip"
         ]
 }

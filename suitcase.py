@@ -4,19 +4,20 @@ import json
 from playwright.async_api import async_playwright
 
 async def main() -> int:
-        goto_response = input("goto: ")
-
         with open("config.json", "r") as f:
                 config = json.load(f)
-                
+
+        goto_response = input("goto: ")
+
         async with async_playwright() as p:
                 browser = await p.chromium.launch(headless=False)
                 page = await browser.new_page()
                 await page.goto(goto_response)
 
-                continue_flag = ""
-                while(continue_flag != "Y"):
-                        continue_flag = (input("continue[y/n]: ").capitalize())
+                continue_flag = input("continue[y/n]: ").capitalize()
+                if(continue_flag != "Y"):
+                        await browser.close()
+                        return 0
 
                 anchors = page.locator("a")
                 srcs = await anchors.evaluate_all(

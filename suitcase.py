@@ -19,7 +19,7 @@ async def main() -> int:
                         continue_flag = (input("continue[y/n]: ").capitalize())
 
                 anchors = page.locator("a")
-                hrefs = await anchors.evaluate_all(
+                srcs = await anchors.evaluate_all(
                         """
                         (anchors, filters) => {
                         return anchors
@@ -29,7 +29,7 @@ async def main() -> int:
                         """,
                         config["filters"]
                 )
-                print(hrefs)
+                print(srcs)
                 
                 await browser.close()
         return 0

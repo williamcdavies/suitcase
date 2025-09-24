@@ -10,9 +10,9 @@ async def main() -> int:
                 page = await browser.new_page()
                 await page.goto(goto_response)
 
-                f = ""
-                while(f != "Y"):
-                        f = (input("continue?[y/n]: ").capitalize())
+                continue_flag = ""
+                while(continue_flag != "Y"):
+                        continue_flag = (input("continue[y/n]: ").capitalize())
 
                 anchors = page.locator("a")
                 hrefs = await anchors.evaluate_all(

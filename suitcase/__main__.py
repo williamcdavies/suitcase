@@ -1,35 +1,26 @@
 import asyncio
-import json
 
 from playwright.async_api       import async_playwright
-from suitcase                   import cfg        
+from suitcase                   import config
+from suitcase                   import script
 
 async def main() -> int:
-        cfg.init()
-
-        goto_response = input("goto: ")
+        url = input("% ")
 
         async with async_playwright() as p:
                 browser = await p.chromium.launch(headless=False)
-                page = await browser.new_page()
-                await page.goto(goto_response)
+                page    = await browser.new_page()
+                
+                await page.goto(url)
 
-                continue_flag = input("continue[y/n]: ").capitalize()
-                if(continue_flag != "Y"):
+                handover = 1 if input("% ") == "y" else 0
+                if(not handover):
                         await browser.close()
                         return 0
-
+                
                 anchors = page.locator("a")
-                srcs = await anchors.evaluate_all(
-                        """
-                        (anchors, filters) => {
-                        return anchors
-                                .map(a => a.href)
-                                .filter(href => filters.some(f => new RegExp(f.replace('.', '\\.'), 'i').test(href)));
-                        }
-                        """,
-                        cfg.load()["filters"]
-                )
+                srcs    = await anchors.evaluate_all(script.read("injection.js"), config.load()["filters"])
+                
                 print(srcs)
                 
                 await browser.close()

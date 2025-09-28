@@ -2,10 +2,11 @@ import asyncio
 
 from playwright.async_api       import async_playwright
 from suitcase                   import config
-from suitcase                   import script
+from suitcase                   import scripts
+from suitcase                   import session
 
 async def main() -> int:
-        url = input("% ")
+        url = input("__main__.py, url, [str]% ")
 
         async with async_playwright() as p:
                 browser = await p.chromium.launch(headless=False)
@@ -13,16 +14,16 @@ async def main() -> int:
                 
                 await page.goto(url)
 
-                handover = 1 if input("% ") == "y" else 0
+                handover = 1 if input("__main__.py, handover, [y/N]% ") == "y" else 0
                 if(not handover):
                         await browser.close()
                         return 0
                 
                 anchors = page.locator("a")
-                srcs    = await anchors.evaluate_all(script.read("injection.js"), config.load()["filters"])
+                urls    = await anchors.evaluate_all(scripts.read("injection.js"), config.load()["filters"])
+                path    = input("__main__.py, path, [Path]% ")
                 
-                print(srcs)
-                
+                await session.download(urls, path)
                 await browser.close()
         return 0
 

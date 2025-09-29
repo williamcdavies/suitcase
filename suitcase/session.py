@@ -5,12 +5,10 @@ import asyncio
 from pathlib import Path
 
 async def download(urls, root: Path):
-        root.mkdir(exist_ok=True)
-
         async with aiohttp.ClientSession() as session:
                 async def _download(url) -> Path:
-                        file = url.split("/")[-1]
-                        path = root / file
+                        file    = url.split("/")[-1]
+                        path    = root / file
                         
                         async with session.get(url) as resp:
                                 resp.raise_for_status()

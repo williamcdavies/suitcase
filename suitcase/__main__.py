@@ -7,7 +7,7 @@ from suitcase                   import scripts
 from suitcase                   import session
 
 async def main() -> int:
-        url = input("__main__.py, url% ")
+        url     = input("__main__.py, url% ")
 
         async with async_playwright() as p:
                 browser = await p.chromium.launch(headless=False)
@@ -15,7 +15,8 @@ async def main() -> int:
                 
                 await page.goto(url)
 
-                handover = 1 if input("__main__.py, handover% ") == "y" else 0
+                handover        = 1 if input("__main__.py, handover% ") == "y" else 0
+                
                 if(not handover):
                         await browser.close()
                         return 0

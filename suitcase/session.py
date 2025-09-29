@@ -9,7 +9,8 @@ async def download(urls, root: Path):
 
         async with aiohttp.ClientSession() as session:
                 async def _download(url) -> Path:
-                        path = root / url.split("/")[-1]
+                        file = url.split("/")[-1]
+                        path = root / file
                         
                         async with session.get(url) as resp:
                                 resp.raise_for_status()

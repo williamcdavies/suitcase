@@ -5,7 +5,16 @@ from pathlib import Path
 CONFIG_JSON = Path(__file__).parent.parent / "config.json"
 
 def init():
-        CONFIG_JSON.write_text(json.dumps({"filters": [".kml", ".txt", ".zip"]}, indent=8))
+        obj     = {
+                        "filters": [
+                                ".kml", 
+                                ".txt", 
+                                ".zip"
+                        ]
+                }
+        data    = json.dumps(obj, indent=8)
+        
+        CONFIG_JSON.write_text(data)
 
 def load():
         if not CONFIG_JSON.exists():

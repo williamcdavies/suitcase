@@ -13,7 +13,7 @@ async def main() -> int:
                 browser = await p.chromium.launch(headless=False)
                 page    = await browser.new_page()
                 
-                await page.goto(url)
+                await page.goto(url, wait_until="domcontentloaded")
 
                 handover        = 1 if input("__main__.py, handover% ") == "y" else 0
                 

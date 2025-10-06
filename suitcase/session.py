@@ -89,7 +89,7 @@ async def download(
                 path = _USER_DOWNLOADS_PATH
 
                 if not path.exists():
-                        raise ValueError("Resolution of _USER_DOWNLOADS_PATH: Failed with path does not exist")
+                        raise ValueError("Resolution of symlink: Failed with path does not exist")
         else:  
                 path.mkdir(parents=True, exist_ok=True)
                 

@@ -39,8 +39,8 @@ async def _download(
         """
         
         url_parse_tree = urlparse(url)
-        filename = url_parse_tree.path.split("/")[-1]
-        path = path / filename
+        filename       = url_parse_tree.path.split("/")[-1]
+        path           = path / filename
         
         try:
                 async with session.get(url) as response:
@@ -89,7 +89,7 @@ async def download(
                 path = _USER_DOWNLOADS_PATH
 
                 if not path.exists():
-                        raise ValueError("Resolution of downloads path tied to user: Failed with system path does not exist")
+                        raise ValueError("Resolution of _USER_DOWNLOADS_PATH: Failed with path does not exist")
         else:  
                 path.mkdir(parents=True, exist_ok=True)
                 

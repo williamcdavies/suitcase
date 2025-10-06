@@ -1,34 +1,28 @@
 import asyncio
 
-from pathlib                    import Path
-from playwright.async_api       import async_playwright
-from suitcase                   import config
-from suitcase                   import scripts
-from suitcase                   import session
+from .                    import *
+from pathlib              import Path
+from playwright.async_api import async_playwright
 
 async def main() -> int:
-        url     = input("__main__.py, url% ")
-
+        url = input("__main__.py, url, [Any]% ")
+        
         async with async_playwright() as p:
                 browser = await p.chromium.launch(headless=False)
                 page    = await browser.new_page()
                 
                 await page.goto(url, wait_until="domcontentloaded")
 
-                handover        = 1 if input("__main__.py, handover% ") == "y" else 0
+                handover = input("__main__.py, handover, [y/N]% ") == "y"
                 
                 if(not handover):
                         await browser.close()
-                        return 0
-                
-                anchors         = page.locator("a")
-                expression      = scripts.read("injection.js")
-                arg             = config.load()["filters"]
-                urls            = await anchors.evaluate_all(expression, arg)
-                path            = Path(input("__main__.py, path% "))
-                
-                await session.download(urls, path)
+                        
+                        return -1
+ 
+                await session.download(await page.locator("a").evaluate_all(scripts.read("injection.js"), config.load()["filters"]), Path("common"), verbose=True)
                 await browser.close()
+        
         return 0
 
 if __name__ == '__main__':

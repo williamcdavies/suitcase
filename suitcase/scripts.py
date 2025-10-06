@@ -11,6 +11,6 @@ def read(
         """
         
         if not (SCRIPTS / script).exists():
-                raise FileNotFoundError(f"Script '{script}' not found in {SCRIPTS}")
+                raise FileNotFoundError("Resolution of symlink: Failed with path does not exist")
 
         return (SCRIPTS / script).read_text(encoding="utf-8")

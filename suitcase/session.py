@@ -30,7 +30,7 @@ async def _download(
                 path: Path,
                 session: aiohttp.ClientSession,
                 /,
-                verbose: bool = False
+                verbose: bool=False
         ):
         """session._download
 
@@ -75,9 +75,9 @@ async def _download(
 
 async def download(
                 urls: Iterable[str],
-                path: Path | None = None,
+                path: Path | None=None,
                 /,
-                verbose: bool = False
+                verbose: bool=False
         ):
         """session.download
 

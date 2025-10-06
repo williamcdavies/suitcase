@@ -1,5 +1,5 @@
 .vscode/
-.common/
+/common/
 
 # macOS stuff:
 .DS_Store

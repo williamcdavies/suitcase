@@ -2,7 +2,10 @@ from pathlib import Path
 
 SCRIPTS = Path(__file__).parent / "scripts"
 
-def read(script: str) -> str:
+def read(
+                script: str,
+                /
+        ) -> str:
         """scripts.read
         
         """

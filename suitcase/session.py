@@ -9,7 +9,7 @@ from urllib.parse    import urlparse
 
 _USER_DOWNLOADS_PATH = user_downloads_path()
 
-def _download_vprint(
+def _download_verbose_print(
                 filename: str,
                 scheme: str,
                 netloc: str,
@@ -41,7 +41,7 @@ async def _download(
         url_parse_tree = urlparse(url)
         filename       = url_parse_tree.path.split("/")[-1]
         path           = path / filename
-        
+
         try:
                 async with session.get(url) as response:
                         response.raise_for_status()
@@ -51,7 +51,7 @@ async def _download(
                                         await wbf.write(chunk)
                 
                 if verbose:
-                        _download_vprint(
+                        _download_verbose_print(
                                 filename, 
                                 url_parse_tree.scheme, 
                                 url_parse_tree.netloc, 
@@ -63,7 +63,7 @@ async def _download(
         
         except aiohttp.ClientResponseError as e:
                 if verbose:
-                        _download_vprint(
+                        _download_verbose_print(
                                 filename, 
                                 url_parse_tree.scheme, 
                                 url_parse_tree.netloc, 

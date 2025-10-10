@@ -7,7 +7,6 @@ def read(
                 /
         ) -> str:
         """scripts.read
-        
         """
         
         if not (SCRIPTS / script).exists():

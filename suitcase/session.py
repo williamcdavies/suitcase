@@ -18,9 +18,6 @@ def _download_verbose_print(
                 /
         ):
         """session._download_vprint
-
-        Parameters
-        ----------
         """
 
         print(f"Download of {filename} from {scheme}://{netloc} to {path}: {content}")
@@ -33,9 +30,6 @@ async def _download(
                 verbose: bool=False
         ):
         """session._download
-
-        Parameters
-        ----------
         """
         
         url_parse_tree = urlparse(url)
@@ -80,9 +74,6 @@ async def download(
                 verbose: bool=False
         ):
         """session.download
-
-        Parameters
-        ----------
         """
 
         if path is None:

@@ -5,6 +5,9 @@ from pathlib              import Path
 from playwright.async_api import async_playwright
 
 async def main() -> int:
+        """suitcase.main
+        """
+        
         url = input("__main__.py, url, [Any]% ")
         
         async with async_playwright() as p:

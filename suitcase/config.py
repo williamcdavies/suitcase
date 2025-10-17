@@ -8,7 +8,18 @@ def init():
         """config.init
         """
 
-        CONFIG_JSON.write_text(json.dumps({"filters": [".kml", ".txt", ".zip"]}, indent=8))
+        CONFIG_JSON.write_text(
+                json.dumps(
+                        {
+                                "filters": [
+                                        ".kml", 
+                                        ".txt", 
+                                        ".zip"
+                                ]
+                        }, 
+                        indent=8
+                )
+        )
 
 def load():
         """config.load

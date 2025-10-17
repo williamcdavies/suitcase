@@ -16,7 +16,7 @@ def _download_verbose_print(
                 path: str,
                 content: str,
                 /
-        ):
+        ) -> None:
         """session._download_vprint
         """
 
@@ -28,7 +28,7 @@ async def _download(
                 session: aiohttp.ClientSession,
                 /,
                 verbose: bool=False
-        ):
+        ) -> Path | None:
         """session._download
         """
         
@@ -72,7 +72,7 @@ async def download(
                 path: Path | None=None,
                 /,
                 verbose: bool=False
-        ):
+        ) -> list[Path | None]:
         """session.download
         """
 

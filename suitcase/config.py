@@ -2,7 +2,7 @@ import json
 
 from pathlib import Path
 
-CONFIG_JSON = Path(__file__).parent.parent / "config.json"
+CONFIG_JSON = Path(__file__).parent / Path(".suitcase") / "config.json"
 
 def init() -> None:    
         """config.init

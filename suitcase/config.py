@@ -1,10 +1,11 @@
 import json
 
 from pathlib import Path
+from typing  import Any
 
 CONFIG_JSON = Path(__file__).parent.parent / "config.json"
 
-def init():    
+def init() -> None:    
         """config.init
         """
 
@@ -21,7 +22,7 @@ def init():
                 )
         )
 
-def load():
+def load() -> Any:
         """config.load
         """
 

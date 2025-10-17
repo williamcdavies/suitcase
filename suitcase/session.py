@@ -85,4 +85,10 @@ async def download(
                 path.mkdir(parents=True, exist_ok=True)
                 
         async with aiohttp.ClientSession() as session:
-                return await asyncio.gather(*(_download(url, path, session, verbose=verbose) for url in urls))
+                return await asyncio.gather(
+                        *(_download(
+                                url, 
+                                path, 
+                                session, 
+                                verbose=verbose
+                        ) for url in urls))

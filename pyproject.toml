@@ -4,7 +4,7 @@ build-backend="setuptools.build_meta"
 
 [project]
 name = "suitcase"
-version = "1.0.101025"
+version = "1.0.101725"
 dependencies = [
         "aiofiles>=24.1.0",
         "aiohttp>=3.12.15",

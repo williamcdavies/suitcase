@@ -1,14 +1,18 @@
 import json
 
+
 from pathlib import Path
 
-CONFIG_JSON = Path(__file__).parent / Path(".suitcase") / "config.json"
 
-def init() -> None:    
+CONFIG_PATH = Path(__file__).parent / "config"
+CONFIG      = CONFIG_PATH / "config.json"
+
+
+def init():
         """config.init
         """
 
-        CONFIG_JSON.write_text(
+        CONFIG.write_text(
                 json.dumps(
                         {
                                 "filters": [
@@ -25,8 +29,8 @@ def load() -> dict[str, list[str]]:
         """config.load
         """
 
-        if not CONFIG_JSON.exists():
+        if not CONFIG.exists():
                 init()
         
-        with open(CONFIG_JSON, encoding="utf-8") as rf: 
+        with open(CONFIG, encoding="utf-8") as rf: 
                 return json.load(rf)

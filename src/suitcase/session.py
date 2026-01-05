@@ -2,32 +2,36 @@ import aiofiles
 import aiohttp
 import asyncio
 
+
 from collections.abc import Iterable
 from pathlib         import Path
 from platformdirs    import user_downloads_path
 from urllib.parse    import urlparse
 
+
 _USER_DOWNLOADS_PATH = user_downloads_path()
 
+
 def _download_verbose_print(
-                filename: str,
-                scheme: str,
-                netloc: str,
-                path: str,
-                content: str,
-                /
-        ) -> None:
-        """session._download_vprint
+        filename: str,
+        scheme: str,
+        netloc: str,
+        path: str,
+        content: str,
+        /
+        ):
+        """session._download_verbose_print
         """
 
         print(f"Download of {filename} from {scheme}://{netloc} to {path}: {content}")
 
+
 async def _download(
-                url: str,
-                path: Path,
-                session: aiohttp.ClientSession,
-                /,
-                verbose: bool=False
+        url: str,
+        path: Path,
+        session: aiohttp.ClientSession,
+        /,
+        verbose: bool=False
         ) -> Path | None:
         """session._download
         """
@@ -67,11 +71,12 @@ async def _download(
                 
                 return None
 
+
 async def download(
-                urls: Iterable[str],
-                path: Path | None=None,
-                /,
-                verbose: bool=False
+        urls: Iterable[str],
+        path: Path | None=None,
+        /,
+        verbose: bool=False
         ) -> list[Path | None]:
         """session.download
         """

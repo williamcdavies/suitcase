@@ -1,15 +1,17 @@
 from pathlib import Path
 
-SCRIPTS = Path(__file__).parent / "scripts"
+
+SCRIPTS_PATH = Path(__file__).parent / "scripts"
+
 
 def read(
-                script: str,
-                /
+        script: str,
+        /
         ) -> str:
         """scripts.read
         """
         
-        if not (SCRIPTS / script).exists():
+        if not (SCRIPTS_PATH / script).exists():
                 raise FileNotFoundError("Resolution of symlink: Failed with path does not exist")
 
-        return (SCRIPTS / script).read_text(encoding="utf-8")
+        return (SCRIPTS_PATH / script).read_text(encoding="utf-8")
